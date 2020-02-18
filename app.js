@@ -37,10 +37,9 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes
-app.use("/", (req, res) => {
-  res.render("default/index");
-});
+// routes
+const defaultRoutes = require('./routes/defaultRoutes');
+app.use('/', defaultRoutes);
 
 /* Start The Server */
 app.listen(PORT, () => {
