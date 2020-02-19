@@ -1,14 +1,14 @@
-const post = require("../models/PostModel").Post;
+const Post = require("../models/PostModel").Post;
 
 module.exports = {
   index: (req, res) => {
     res.render("admin/index");
   },
   getPosts: (req, res) => {
-    res.send("All posts");
+    res.render("admin/posts/index");
   },
   submitPosts: (req, res) => {
-    const newPost = new post({
+    const newPost = new Post({
       title: req.body.title,
       description: req.body.description,
       status: req.body.status
@@ -16,7 +16,7 @@ module.exports = {
     newPost.save().then(post => {
       // console.log(post);
       req.flash("success-message", "Post created successfully");
-      req.redirect("/admin/posts");
+      res.redirect("/admin/posts");
     });
   },
   createPosts: (req, res) => {
