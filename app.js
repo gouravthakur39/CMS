@@ -1,7 +1,11 @@
+const {globalVariables} = require('./config/configuration');
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const hbs = require("express-handlebars");
+const flash = require("connect-flash");
+const session = require("express-session");
 const { mongodbUrl, PORT } = require("./config/configuration");
 
 
@@ -27,6 +31,18 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// flash and sessions
+app.use(session({
+  secret: 'anysecret',
+  saveUninitialized: true,
+  resave: true
+
+}));
+
+app.use(flash());
+
+app.use(globalVariables);
 
 // Setup view engine with Handlebars
 app.engine(
