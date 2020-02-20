@@ -17,7 +17,23 @@ const PostSchema = new Schema({
     creationDate: {
         type: Date,
         default: Date.now()
-    }
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    // assuming one post belongs to only one category
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'category'
+    },
+    // Array
+    comments: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
+        }
+    ]
 });
 
 module.exports = {Post: mongoose.model('post', PostSchema )};
