@@ -5,7 +5,9 @@ module.exports = {
     res.render("admin/index");
   },
   getPosts: (req, res) => {
-    res.render("admin/posts/index");
+    Post.find().sort({_id: -1 }).then(posts => {
+      res.render("admin/posts/index", {posts: posts});
+    });
   },
   submitPosts: (req, res) => {
     const newPost = new Post({
