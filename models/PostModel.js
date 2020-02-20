@@ -33,7 +33,11 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'comment'
         }
-    ]
+    ],
+    allowComments: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = {Post: mongoose.model('post', PostSchema )};

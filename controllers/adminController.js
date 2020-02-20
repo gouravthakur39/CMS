@@ -5,15 +5,19 @@ module.exports = {
     res.render("admin/index");
   },
   getPosts: (req, res) => {
-    Post.find().sort({_id: -1 }).then(posts => {
-      res.render("admin/posts/index", {posts: posts});
-    });
+    Post.find()
+      .sort({ _id: -1 })
+      .then(posts => {
+        res.render("admin/posts/index", { posts: posts });
+      });
   },
   submitPosts: (req, res) => {
+    const commentsAllowed =  req.body.allowComments ? true : false;
     const newPost = new Post({
       title: req.body.title,
       description: req.body.description,
-      status: req.body.status
+      status: req.body.status,
+      allowComments: commentsAllowed
     });
     newPost.save().then(post => {
       // console.log(post);
@@ -23,5 +27,11 @@ module.exports = {
   },
   createPosts: (req, res) => {
     res.render("admin/posts/create");
+  },
+  editPost: (req, res) => {
+    const id = req.params.id;
+    Post.findById(id).then(post => {
+      res.render("admin/posts/edit", {post: post});
+    });  
   }
 };
