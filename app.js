@@ -6,6 +6,7 @@ const path = require("path");
 const hbs = require("express-handlebars");
 const flash = require("connect-flash");
 const session = require("express-session");
+const methodOverride = require("method-override")
 const { mongodbUrl, PORT } = require("./config/configuration");
 
 
@@ -52,6 +53,9 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+
+// Method override middleware
+app.use(methodOverride('newMethod'));
 
 // routes
 const defaultRoutes = require('./routes/defaultRoutes');

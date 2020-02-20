@@ -22,6 +22,8 @@ router
 
 router.route("/posts/edit/:id")
   .get(adminController.editPost);
-// .post(adminController.submitPosts);
+
+router.route("/posts/delete/:id")
+  .delete(adminController.deletePost);
 
 module.exports = router;
